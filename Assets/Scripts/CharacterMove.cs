@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//controls character movement. Based on MVC Demo & Unity Documentation: https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+//controls character movement. Based on MVC Demo, Unity Documentation: https://docs.unity3d.com/ScriptReference/CharacterController.Move.html, and this thread: https://forum.unity.com/threads/third-person-controller-how-to-make-player-to-move-towards-the-direction-the-camera-is-facing.540671/
 public class CharacterMove : MonoBehaviour
 {
     private CharacterController controller;
+    private Transform cameraTransform;
     private Vector3 moveDirection = Vector3.zero;
     private bool canJump = false;
     private bool isJumping = false;
@@ -24,23 +25,38 @@ public class CharacterMove : MonoBehaviour
     private bool jumpStart;
     private bool jumping;
 
+    public float turnSmoothTime = 0.2f;
+    float turnSmoothVelocity;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        cameraTransform = Camera.main.transform;
     }
 
     void Update()
     {
         //player inputs
+        
         xMove = Input.GetAxis("Horizontal");
         yMove = Input.GetAxis("Vertical");
+        
         jumpStart = Input.GetButton("Jump");
         jumping = Input.GetButton("Jump");
 
+        Vector3 viewDir = Camera.main.transform.forward;
+
+        viewDir.y = 0;
+        viewDir.Normalize();
+
+        Quaternion newRot = Quaternion.LookRotation(viewDir);
+
+        // player transform
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRot, 5f * Time.deltaTime);
+
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(xMove, 0.0f, yMove);
+            moveDirection = transform.right * xMove + transform.forward * yMove;
             moveDirection *= speed;
 
             canJump = true;
@@ -55,7 +71,7 @@ public class CharacterMove : MonoBehaviour
             jumpHeight = transform.position.y - jumpStartY;
             if (jumping && jumpHeight < maxJumpHeight)
             {
-                moveDirection = new Vector3(xMove, 0.0f, yMove);
+                moveDirection = transform.right * xMove + transform.forward * yMove;
                 moveDirection *= speed;
                 moveDirection.y = jumpSpeed;
             }
