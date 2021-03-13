@@ -133,7 +133,8 @@ GameObject:
   - component: {fileID: 311786232}
   - component: {fileID: 311786231}
   - component: {fileID: 311786230}
-  m_Layer: 0
+  - component: {fileID: 311786234}
+  m_Layer: 9
   m_Name: Blastball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,6 +215,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &311786234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311786229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a27028519c334ce581bd0d710b2ea3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +607,7 @@ MonoBehaviour:
   mouseSensitivity: 5
   target: {fileID: 1789664496}
   dstFromTarget: 7
-  pitchMinMax: {x: -40, y: 85}
+  pitchMinMax: {x: -25, y: 50}
   rotationSmoothTime: 0.12
 --- !u!1 &1789664492
 GameObject:
@@ -609,8 +623,7 @@ GameObject:
   - component: {fileID: 1789664493}
   - component: {fileID: 1789664497}
   - component: {fileID: 1789664498}
-  - component: {fileID: 1789664499}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,17 +739,3 @@ MonoBehaviour:
   jumpSpeed: 8
   maxJumpHeight: 5
   turnSmoothTime: 0.2
---- !u!114 &1789664499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789664492}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2634e1abda25a417a80d1b366f0199f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  jumpSpeed: 8

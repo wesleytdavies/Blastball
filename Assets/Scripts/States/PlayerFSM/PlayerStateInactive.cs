@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateInactive : MonoBehaviour
+public class PlayerStateInactive : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override void Enter(Player player) { }
+    public override void Update(Player player) { }
+    public override void Leave(Player player) { }
 }

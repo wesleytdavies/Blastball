@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Blastball : MonoBehaviour
 {
+    public const int MaxIncrement = 5; //how many times the blastball must be passed before it blasts
+    public Color maxColor; //the penultimate color of the blastball before it blasts
+
     private BlastballState currentState;
-    public BlastballStateIncrementing stateIncrementing = new BlastballStateIncrementing();
+    public BlastballStateIdle stateIdle = new BlastballStateIdle();
+    public BlastballStateThrown stateThrown = new BlastballStateThrown();
     public BlastballStateBlastOnImpact stateBlastOnImpact = new BlastballStateBlastOnImpact();
     public BlastballStateBlasting stateBlasting = new BlastballStateBlasting();
 
@@ -24,7 +28,7 @@ public class Blastball : MonoBehaviour
 
     void Start()
     {
-        
+        ChangeState(stateIdle);
     }
 
     void Update()

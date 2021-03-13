@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateHasBall : PlayerState
+public class PlayerStateEmptyHanded : PlayerState
 {
     public override void Enter(Player player) { }
     public override void Update(Player player) {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            //throw the ball
-        }
+
     }
     public override void Leave(Player player) { }
 }

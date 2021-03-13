@@ -13,5 +13,5 @@ public class VariableManager : MonoBehaviour
     }
     #endregion
 
-    public const int maxIncrement = 5;
+    //public const int maxIncrement = 5;
 }
