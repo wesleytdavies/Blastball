@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BlastballState
 {
-    public virtual void Enter() { }
-    public virtual void Update() { }
-    public virtual void Leave() { }
+    public abstract void Enter(Blastball blastball);
+    public abstract void Update(Blastball blastball);
+    public abstract void Leave(Blastball blastball);
 }

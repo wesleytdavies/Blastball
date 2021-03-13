@@ -20,7 +20,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void Start()
     {
-
+        if (lockCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void LateUpdate()
