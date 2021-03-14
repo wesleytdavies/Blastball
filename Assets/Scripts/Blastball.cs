@@ -7,6 +7,7 @@ public class Blastball : MonoBehaviour
     public const int MaxIncrement = 5; //how many times the blastball must be passed before it blasts
     public Color minColor; //initial blastball color
     public Color maxColor; //the penultimate color of the blastball before it blasts
+    public int currentTeam; //the team that is currently in possession of the blastball
 
     private BlastballState currentState;
     public BlastballStateIdle stateIdle = new BlastballStateIdle();

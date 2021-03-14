@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerStateEmptyHanded : PlayerState
 {
     private CapsuleCollider capsuleCollider;
-    private Collider[] overlapBall = new Collider[1];
+    private readonly Collider[] overlapBall = new Collider[1];
     private bool oldCheckCapsule;
-    private bool hasBall;
 
     private LayerMask ballMask;
 
@@ -28,7 +27,7 @@ public class PlayerStateEmptyHanded : PlayerState
         Physics.OverlapCapsuleNonAlloc(top, bottom, radius, overlapBall, ballMask);
         if (!oldCheckCapsule && checkCapsule)
         {
-            hasBall = true;
+            player.playerBall = overlapBall[0].gameObject;
             if (overlapBall[0].gameObject.GetComponent<Blastball>() != null)
             {
                 //player has the blastball
@@ -37,12 +36,10 @@ public class PlayerStateEmptyHanded : PlayerState
         oldCheckCapsule = checkCapsule;
 
         //change state
-        if (hasBall)
+        if (player.playerBall != null)
         {
             player.ChangeState(player.stateHasBall);
         }
     }
-    public override void Leave(Player player) {
-        hasBall = false;
-    }
+    public override void Leave(Player player) { }
 }

@@ -8,7 +8,7 @@ public class BlastballStateThrown : BlastballState
     private int increment; //how many times the blastball has hit something. Once it reaches MaxIncrement, it explodes after the next hit
     private int oldIncrement; //the increment of the blastball before being passed
     private bool oldCheckSphere; //previous blastball collision
-    private Collider[] overlapPlayer = new Collider[1]; //single index array for storing blastball/player collision
+    private readonly Collider[] overlapPlayer = new Collider[1]; //single index array for storing blastball/player collision
     private Collider oldPlayer; //previous player who had the blastball
 
     private LayerMask playerMask;

@@ -44,12 +44,12 @@ public class CharacterMove : MonoBehaviour
         jumpStart = Input.GetButton("Jump");
         jumping = Input.GetButton("Jump");
 
-        Vector3 viewDir = Camera.main.transform.forward;
+        Vector3 viewDirection = cameraTransform.forward;
 
-        viewDir.y = 0;
-        viewDir.Normalize();
+        viewDirection.y = 0;
+        viewDirection.Normalize();
 
-        Quaternion newRot = Quaternion.LookRotation(viewDir);
+        Quaternion newRot = Quaternion.LookRotation(viewDirection);
 
         // player transform
         transform.rotation = Quaternion.Slerp(transform.rotation, newRot, 5f * Time.deltaTime);
