@@ -6,14 +6,12 @@ public class PlayerStateHasBall : PlayerState
 {
     private CapsuleCollider playerCollider;
     private SphereCollider ballCollider;
-    private Rigidbody rbBall;
     private Transform cameraTransform;
 
     public override void Enter(Player player) {
         playerCollider = player.GetComponent<CapsuleCollider>();
         ballCollider = player.playerBall.GetComponent<SphereCollider>();
         ballCollider.enabled = false;//TODO: only ignore collisions with other players as well as other held burstballs, but not thrown burstballs
-        rbBall = player.playerBall.GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
     }
     public override void Update(Player player) {
@@ -24,12 +22,14 @@ public class PlayerStateHasBall : PlayerState
             //throw the ball
             Vector3 viewDirection = cameraTransform.forward;
             viewDirection.Normalize();
-            rbBall.AddForce(viewDirection * 20, ForceMode.Impulse); //TODO: get rid of this magic number
+            //rbBall.AddForce(viewDirection * 20, ForceMode.Impulse); //TODO: get rid of this magic number
+            player.playerBall.GetComponent<Ball>().ThrowBall(viewDirection); //throw ball in direction of the camera
             player.ChangeState(player.stateEmptyHanded);
         }
     }
     public override void Leave(Player player) {
         ballCollider.enabled = true; //TODO: see above
+        player.playerBall.GetComponent<Blastball>().ChangeState(player.playerBall.GetComponent<Blastball>().stateThrown);
         player.playerBall = null;
     }
 }

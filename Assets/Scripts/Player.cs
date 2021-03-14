@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BallType { Blastball, Burstball };
+
 public class Player : MonoBehaviour
 {
     [HideInInspector] public GameObject playerBall;
