@@ -41,7 +41,8 @@ public class BlastballStateThrown : BlastballState
         {
             increment++; //upon being passed, the blastball increments
             Debug.Log("incrementing");
-            renderer.material.color = Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement); //lerp blastball color as it increments
+            renderer.material.SetColor("_Color", Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement)); //lerp blastball color as it increments
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement)); //lerp blastball emission color as it increments
             blastball.transform.localScale = Vector3.Lerp(minSize, maxSize, increment / Blastball.MaxIncrement); //lerp blastball size as it increments
             rb.mass = Mathf.Lerp(minMass, maxMass, increment / Blastball.MaxIncrement);
             //oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player TODO: uncomment this!!!
