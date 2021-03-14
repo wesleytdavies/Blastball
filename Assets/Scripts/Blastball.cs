@@ -4,11 +4,35 @@ using UnityEngine;
 
 public class Blastball : MonoBehaviour
 {
-    public const int MaxIncrement = 5; //how many times the blastball must be passed before it blasts
+    public const float MaxIncrement = 5f; //how many times the blastball must be passed before it blasts
     public Color minColor; //initial blastball color
     public Color maxColor; //final blastball color
-    public float minSize; //initial blastball size
-    public float maxSize;  //final blastball size
+    [SerializeField] private float minSize; //initial blastball size
+    [SerializeField] private float maxSize;  //final blastball size
+    public Vector3 MinSizeVector
+    {
+        get
+        {
+            return _minSizeVector;
+        }
+        private set
+        {
+            _minSizeVector = value;
+        }
+    }
+    private Vector3 _minSizeVector = Vector3.one;
+    public Vector3 MaxSizeVector
+    {
+        get
+        {
+            return _maxSizeVector;
+        }
+        private set
+        {
+            _maxSizeVector = value;
+        }
+    }
+    private Vector3 _maxSizeVector = Vector3.one;
     public int currentTeam; //the team that is currently in possession of the blastball
 
     private BlastballState currentState;
@@ -32,6 +56,8 @@ public class Blastball : MonoBehaviour
 
     void Start()
     {
+        MinSizeVector *= minSize;
+        MaxSizeVector *= maxSize;
         ChangeState(stateIdle);
     }
 
