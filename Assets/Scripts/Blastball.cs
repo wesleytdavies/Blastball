@@ -6,7 +6,9 @@ public class Blastball : MonoBehaviour
 {
     public const int MaxIncrement = 5; //how many times the blastball must be passed before it blasts
     public Color minColor; //initial blastball color
-    public Color maxColor; //the penultimate color of the blastball before it blasts
+    public Color maxColor; //final blastball color
+    public float minSize; //initial blastball size
+    public float maxSize;  //final blastball size
     public int currentTeam; //the team that is currently in possession of the blastball
 
     private BlastballState currentState;
@@ -36,5 +38,10 @@ public class Blastball : MonoBehaviour
     void Update()
     {
         currentState.Update(this);
+    }
+
+    public void ThrowBall(Vector3 throwDirection)
+    {
+        ChangeState(stateThrown);
     }
 }

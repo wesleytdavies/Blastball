@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject playerBall;
+    [HideInInspector] public GameObject playerBall;
     public Vector3 heldBallLocation; //location of held ball relative to player
 
     private PlayerState currentState;

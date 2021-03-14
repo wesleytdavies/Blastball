@@ -15,12 +15,16 @@ public class BlastballStateThrown : BlastballState
     private Renderer renderer;
     private Color minColor;
     private Color maxColor;
+    private Vector3 minSize = Vector3.one;
+    private Vector3 maxSize = Vector3.one;
 
     public override void Enter(Blastball blastball) {
         playerMask = LayerMask.GetMask("Player");
         renderer = blastball.GetComponent<Renderer>();
         minColor = blastball.minColor;
         maxColor = blastball.maxColor;
+        minSize *= blastball.minSize;
+        maxSize *= blastball.maxSize;
     }
     public override void Update(Blastball blastball) {
 
@@ -33,6 +37,7 @@ public class BlastballStateThrown : BlastballState
         {
             increment++; //upon being passed, the blastball increments
             renderer.material.color = Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement); //lerp blastball color as it increments
+            blastball.transform.localScale = Vector3.Lerp(minSize, maxSize, increment / Blastball.MaxIncrement); //lerp blastball size as it increments
             oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player
         }
         oldCheckSphere = checkSphere;
