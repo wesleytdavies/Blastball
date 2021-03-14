@@ -13,5 +13,6 @@ public class VariableManager : MonoBehaviour
     }
     #endregion
 
+    //public const int numPlayers = 6; //number of players
     //public const int maxIncrement = 5;
 }

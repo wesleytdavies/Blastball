@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Vector3 heldBallLocation; //location of held ball relative to player
+
     private PlayerState currentState;
     public PlayerStateEmptyHanded stateEmptyHanded = new PlayerStateEmptyHanded();
     public PlayerStateHasBall stateHasBall = new PlayerStateHasBall();

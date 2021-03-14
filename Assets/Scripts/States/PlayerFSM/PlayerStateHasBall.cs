@@ -9,6 +9,8 @@ public class PlayerStateHasBall : PlayerState
         if (Input.GetButtonDown("Fire1"))
         {
             //throw the ball
+            Vector3 viewDir = Camera.main.transform.forward;
+            viewDir.Normalize();
         }
     }
     public override void Leave(Player player) { }
