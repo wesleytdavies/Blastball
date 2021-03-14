@@ -11,20 +11,26 @@ public class BlastballStateThrown : BlastballState
     private readonly Collider[] overlapPlayer = new Collider[1]; //single index array for storing blastball/player collision
     private Collider oldPlayer; //previous player who had the blastball
 
+    private Rigidbody rb;
     private LayerMask playerMask;
     private Renderer renderer;
     private Color minColor;
     private Color maxColor;
     private Vector3 minSize;
     private Vector3 maxSize;
+    private float minMass;
+    private float maxMass;
 
     public override void Enter(Blastball blastball) {
+        rb = blastball.GetComponent<Rigidbody>();
         playerMask = LayerMask.GetMask("Player");
         renderer = blastball.GetComponent<Renderer>();
         minColor = blastball.minColor;
         maxColor = blastball.maxColor;
         minSize = blastball.MinSizeVector;
         maxSize = blastball.MaxSizeVector;
+        minMass = blastball.MinMass;
+        maxMass = blastball.MaxMass;
     }
     public override void Update(Blastball blastball) {
         //check collisions
@@ -37,6 +43,7 @@ public class BlastballStateThrown : BlastballState
             Debug.Log("incrementing");
             renderer.material.color = Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement); //lerp blastball color as it increments
             blastball.transform.localScale = Vector3.Lerp(minSize, maxSize, increment / Blastball.MaxIncrement); //lerp blastball size as it increments
+            rb.mass = Mathf.Lerp(minMass, maxMass, increment / Blastball.MaxIncrement);
             //oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player TODO: uncomment this!!!
             
         }

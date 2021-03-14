@@ -5,6 +5,10 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public enum BallType { Blastball, Burstball };
+
+    private const float throwForce = 10f; //velocity the ball should be thrown at
+
+    #region getters/setters
     public BallType Type
     {
         get
@@ -16,7 +20,8 @@ public class Ball : MonoBehaviour
             _type = value;
         }
     }
-    private BallType _type; //backing variable for ballType
+    private BallType _type;
+    #endregion
 
     private Rigidbody rbBall;
 
@@ -39,7 +44,7 @@ public class Ball : MonoBehaviour
 
     public void ThrowBall(Vector3 throwDirection)
     {
-        rbBall.AddForce(throwDirection * 20, ForceMode.Impulse); //TODO: get rid of this magic number
+        rbBall.AddForce(throwDirection * throwForce, ForceMode.Impulse); //TODO: get rid of this magic number
         if (this.Type == BallType.Blastball)
         {
             this.gameObject.GetComponent<Blastball>().ChangeState(this.gameObject.GetComponent<Blastball>().stateThrown);

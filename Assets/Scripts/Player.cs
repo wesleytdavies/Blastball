@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     [HideInInspector] public GameObject playerBall;
     public Vector3 heldBallLocation; //location of held ball relative to player
 
+    #region FSM
     private PlayerState currentState;
     public PlayerStateEmptyHanded stateEmptyHanded = new PlayerStateEmptyHanded();
     public PlayerStateHasBall stateHasBall = new PlayerStateHasBall();
     public PlayerStateInactive stateInactive = new PlayerStateInactive();
+    #endregion
 
     public void ChangeState(PlayerState newState)
     {

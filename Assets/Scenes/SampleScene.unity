@@ -233,6 +233,8 @@ MonoBehaviour:
   maxColor: {r: 1, g: 0, b: 0, a: 1}
   minSize: 1
   maxSize: 2
+  minMass: 1
+  maxMass: 2
   currentTeam: 0
 --- !u!54 &311786235
 Rigidbody:
