@@ -17,19 +17,16 @@ public class PlayerStateHasBall : PlayerState
     public override void Update(Player player) {
         player.playerBall.gameObject.transform.position = player.transform.position + player.transform.right * player.heldBallLocation.x + player.transform.up * player.heldBallLocation.y + player.transform.forward * player.heldBallLocation.z; //move the ball to the player's hand
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1")) //throw the ball
         {
-            //throw the ball
-            Vector3 viewDirection = cameraTransform.forward;
+            Vector3 viewDirection = cameraTransform.forward; //get the direction of the camera
             viewDirection.Normalize();
-            //rbBall.AddForce(viewDirection * 20, ForceMode.Impulse); //TODO: get rid of this magic number
             player.playerBall.GetComponent<Ball>().ThrowBall(viewDirection); //throw ball in direction of the camera
-            player.ChangeState(player.stateEmptyHanded);
+            player.ChangeState(player.stateEmptyHanded); //change state
         }
     }
     public override void Leave(Player player) {
         ballCollider.enabled = true; //TODO: see above
-        player.playerBall.GetComponent<Blastball>().ChangeState(player.playerBall.GetComponent<Blastball>().stateThrown);
         player.playerBall = null;
     }
 }

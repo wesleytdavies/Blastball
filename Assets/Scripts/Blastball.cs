@@ -10,7 +10,6 @@ public class Blastball : MonoBehaviour
     public float minSize; //initial blastball size
     public float maxSize;  //final blastball size
     public int currentTeam; //the team that is currently in possession of the blastball
-    public bool isThrown;
 
     private BlastballState currentState;
     public BlastballStateIdle stateIdle = new BlastballStateIdle();

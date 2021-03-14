@@ -12,7 +12,8 @@ public class PlayerStateEmptyHanded : PlayerState
 
     public override void Enter(Player player) {
         playerCollider = player.GetComponent<CapsuleCollider>();
-        ballMask = LayerMask.GetMask("Ball");
+        ballMask = LayerMask.GetMask("Ball"); //all balls must be on the Ball layer
+        Debug.Log("Entered");
     }
     public override void Update(Player player) {
         //OverlapCapsule calculations based on this: https://roundwide.com/physics-overlap-capsule/
@@ -27,9 +28,10 @@ public class PlayerStateEmptyHanded : PlayerState
         Physics.OverlapCapsuleNonAlloc(top, bottom, radius, overlapBall, ballMask);
         if (!oldCheckCapsule && checkCapsule)
         {
+            Debug.Log("Collided");
             player.playerBall = overlapBall[0].gameObject;
         }
-        oldCheckCapsule = checkCapsule;
+        //oldCheckCapsule = checkCapsule; TODO: uncomment this!!!
 
         //change state
         if (player.playerBall != null)

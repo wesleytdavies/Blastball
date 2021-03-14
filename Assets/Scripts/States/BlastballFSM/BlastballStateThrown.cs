@@ -25,10 +25,11 @@ public class BlastballStateThrown : BlastballState
         maxColor = blastball.maxColor;
         minSize *= blastball.minSize;
         maxSize *= blastball.maxSize;
+        Debug.Log("Blasteed");
     }
     public override void Update(Blastball blastball) {
 
-
+        /*
         //check collisions
         bool checkSphere = Physics.CheckSphere(blastball.transform.position, blastball.transform.lossyScale.x / 2, playerMask);
         Physics.OverlapSphereNonAlloc(blastball.transform.position, blastball.transform.lossyScale.x / 2, overlapPlayer, playerMask); //store the last player to have the blastball to prevent them from passing it to themselves
@@ -38,7 +39,7 @@ public class BlastballStateThrown : BlastballState
             increment++; //upon being passed, the blastball increments
             renderer.material.color = Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement); //lerp blastball color as it increments
             blastball.transform.localScale = Vector3.Lerp(minSize, maxSize, increment / Blastball.MaxIncrement); //lerp blastball size as it increments
-            oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player
+            //oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player TODO: uncomment this!!!
         }
         oldCheckSphere = checkSphere;
 
@@ -50,6 +51,7 @@ public class BlastballStateThrown : BlastballState
         {
             blastball.ChangeState(blastball.stateIdle);
         }
+        */
     }
     public override void Leave(Blastball blastball) {
         oldIncrement = increment;
