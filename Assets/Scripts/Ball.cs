@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     public enum BallType { Blastball, Burstball };
 
-    private const float throwForce = 10f; //velocity the ball should be thrown at
+    private const float throwForce = 20f; //velocity the ball should be thrown at
 
     #region getters/setters
     public BallType Type
