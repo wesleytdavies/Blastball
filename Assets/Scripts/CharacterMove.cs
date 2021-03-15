@@ -13,6 +13,8 @@ public class CharacterMove : MonoBehaviour
     private float jumpStartY; //the y-level of the player when they first start jumping
     private float jumpHeight; //how high the player is relative to jumpStartY
 
+    public Animator animator; //animations and model provided by: https://assetstore.unity.com/packages/3d/animations/basic-motions-free-pack-154271#description
+
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float maxJumpHeight;
@@ -56,12 +58,30 @@ public class CharacterMove : MonoBehaviour
 
         if (controller.isGrounded)
         {
+            animator.SetBool("isJumping", false);
             moveDirection = transform.right * xMove + transform.forward * yMove;
             moveDirection *= speed;
+
+            if (yMove < 0)
+            {
+                animator.SetBool("isRunningBackwards", true);
+            }else if (moveDirection != Vector3.zero)
+            {
+                animator.SetBool("isRunningBackwards", false);
+                animator.SetBool("isRunning", true);
+            }
+            else
+            {
+                animator.SetBool("isRunningBackwards", false);
+                animator.SetBool("isRunning", false);
+            }
 
             canJump = true;
             if (jumpStart)
             {
+                animator.SetBool("isRunningBackwards", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isJumping", true);
                 isJumping = true;
                 jumpStartY = transform.position.y;
             }
@@ -77,6 +97,7 @@ public class CharacterMove : MonoBehaviour
             }
             else
             {
+                isJumping = false;
                 canJump = false;
             }
         }
