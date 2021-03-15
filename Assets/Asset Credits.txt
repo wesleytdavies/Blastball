@@ -1,0 +1,11 @@
+Asset credits:
+
+Music: by Wesley Davies
+
+Player model/animation: https://assetstore.unity.com/packages/3d/animations/basic-motions-free-pack-154271
+
+Toon shader: https://assetstore.unity.com/packages/vfx/shaders/toon-shader-free-21288
+
+Skybox: https://assetstore.unity.com/packages/vfx/shaders/free-skybox-extended-shader-107400
+
+B particle sampled from "Black Prince" - Wadsworth Jarrell
