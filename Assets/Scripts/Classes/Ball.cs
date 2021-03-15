@@ -65,10 +65,6 @@ public class Ball : MonoBehaviour
         foreach (Collider exploded in explodedColliders)
         {
             Rigidbody rb = exploded.GetComponent<Rigidbody>();
-            if (exploded.GetComponent<CharacterController>())
-            {
-                exploded.GetComponent<Player>().ChangeState(exploded.GetComponent<Player>().stateInactive);
-            }
             if (exploded.GetComponent<Ball>())
             {
                 Instantiate(blastParticles, exploded.transform.position, Quaternion.identity);

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PlayerStateHasBall : PlayerState
 {
-    private CapsuleCollider playerCollider;
     private SphereCollider ballCollider;
     private Transform cameraTransform;
 
     public override void Enter(Player player) {
-        playerCollider = player.GetComponent<CapsuleCollider>();
         ballCollider = player.playerBall.GetComponent<SphereCollider>();
         ballCollider.enabled = false;//TODO: only ignore collisions with other players as well as other held burstballs, but not thrown burstballs
         cameraTransform = Camera.main.transform;
