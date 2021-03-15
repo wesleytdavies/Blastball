@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [HideInInspector] public GameObject playerBall;
     public Vector3 heldBallLocation; //location of held ball relative to player
+    public const float maxInactiveTime = 3f; //how long player can't input after being exploded
 
     #region FSM
     private PlayerState currentState;

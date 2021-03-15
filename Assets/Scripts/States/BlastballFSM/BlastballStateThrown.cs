@@ -45,8 +45,8 @@ public class BlastballStateThrown : BlastballState
             renderer.material.SetColor("_EmissionColor", Color.Lerp(minColor, maxColor, increment / Blastball.MaxIncrement)); //lerp blastball emission color as it increments
             blastball.transform.localScale = Vector3.Lerp(minSize, maxSize, increment / Blastball.MaxIncrement); //lerp blastball size as it increments
             rb.mass = Mathf.Lerp(minMass, maxMass, increment / Blastball.MaxIncrement);
-            //oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player TODO: uncomment this!!!
-            
+            oldPlayer = overlapPlayer[0]; //set the player who has the ball as the old player
+            Debug.Log(oldPlayer.gameObject);
         }
         oldCheckSphere = checkSphere;
 

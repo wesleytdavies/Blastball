@@ -25,17 +25,18 @@ public class Ball : MonoBehaviour
     #endregion
 
     private Rigidbody rbBall;
+    [SerializeField] private GameObject blastParticles;
 
     void Start()
     {
-        if (this.gameObject.GetComponent<Blastball>())
+        if (gameObject.GetComponent<Blastball>())
         {
             Type = BallType.Blastball;
-        }else if (this.gameObject.GetComponent<Burstball>())
+        }else if (gameObject.GetComponent<Burstball>())
         {
             Type = BallType.Burstball;
         }
-        rbBall = this.gameObject.GetComponent<Rigidbody>();
+        rbBall = gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -48,14 +49,14 @@ public class Ball : MonoBehaviour
         Vector3 throwDirection = lookDirection;
         throwDirection.y += throwVerticalMagnitude;
         rbBall.AddForce(throwDirection * throwForce, ForceMode.Impulse);
-        if (this.Type == BallType.Blastball)
+        if (Type == BallType.Blastball)
         {
-            this.gameObject.GetComponent<Blastball>().ChangeState(this.gameObject.GetComponent<Blastball>().stateThrown);
+            GetComponent<Blastball>().ChangeState(GetComponent<Blastball>().stateThrown);
         }
     }
 
     //explosion code based on Unity documentation: https://docs.unity3d.com/ScriptReference/Rigidbody.AddExplosionForce.html
-    public void Blast(Vector3 epicenter, float radius, float magnitude)
+    public void Blast(Vector3 epicenter, float radius, float magnitude, float lift)
     {
         Collider[] explodedColliders = Physics.OverlapSphere(epicenter, radius);
         foreach (Collider exploded in explodedColliders)
@@ -63,13 +64,16 @@ public class Ball : MonoBehaviour
             Rigidbody rb = exploded.GetComponent<Rigidbody>();
             if (exploded.GetComponent<CharacterController>())
             {
-                exploded.GetComponent<CharacterController>().enabled = false;
-                rb.isKinematic = false;
-                exploded.GetComponent<Player>();
+                exploded.GetComponent<Player>().ChangeState(exploded.GetComponent<Player>().stateInactive);
+            }
+            if (exploded.GetComponent<Ball>())
+            {
+                Instantiate(blastParticles, exploded.transform.position, Quaternion.identity);
+                Destroy(exploded.gameObject);
             }
             if (rb != null)
             {
-                rb.AddExplosionForce(magnitude, epicenter, radius, 3.0f); //TODO: get rid of this magic number
+                rb.AddExplosionForce(magnitude, epicenter, radius, lift);
             }
         }
     }
