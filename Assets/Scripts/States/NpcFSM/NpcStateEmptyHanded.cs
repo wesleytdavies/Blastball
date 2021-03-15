@@ -13,12 +13,10 @@ public class NpcStateEmptyHanded : NpcState
 
     public override void Enter(Npc npc)
     {
-        Debug.Log("penis");
         npcCollider = npc.GetComponent<CapsuleCollider>();
         ballMask = LayerMask.GetMask("Ball"); //all balls must be on the Ball layer
         closestBall = npc.FindClosestBall(npc.transform.position);
         npc.GetComponent<NpcController>().GoToBall(closestBall);
-        //npc.GetComponent<NpcController>().closestBall = closestBall;
     }
     public override void Update(Npc npc)
     {
