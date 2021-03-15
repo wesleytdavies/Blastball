@@ -13,7 +13,7 @@ public class CharacterMove : MonoBehaviour
     private float jumpStartY; //the y-level of the player when they first start jumping
     private float jumpHeight; //how high the player is relative to jumpStartY
 
-    public Animator animator; //animations and model provided by: https://assetstore.unity.com/packages/3d/animations/basic-motions-free-pack-154271#description
+    [SerializeField] private Animator animator; //animations and model provided by: https://assetstore.unity.com/packages/3d/animations/basic-motions-free-pack-154271#description
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;

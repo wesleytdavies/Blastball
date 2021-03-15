@@ -6,6 +6,11 @@ using UnityEngine.AI;
 public class NpcController : MonoBehaviour
 {
     private NavMeshAgent agent;
+    [SerializeField] private Animator animator;
+    public const float TurnTime = 5f;
+
+    private Vector3 currentPosition;
+    private Vector3 lastPosition;
 
     void Awake()
     {
@@ -14,7 +19,16 @@ public class NpcController : MonoBehaviour
 
     void Update()
     {
-
+        currentPosition = transform.position;
+        if (currentPosition != lastPosition)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+        lastPosition = currentPosition;
     }
 
     public void GoToBall(GameObject ball)
@@ -23,10 +37,10 @@ public class NpcController : MonoBehaviour
         FaceTarget(ball.transform.position);
     }
 
-    void FaceTarget(Vector3 targetPos)
+    public void FaceTarget(Vector3 targetPos)
     {
         Vector3 direction = (targetPos - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); //TODO: get rid of this magic number
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnTime);
     }
 }

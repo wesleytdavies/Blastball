@@ -7,6 +7,9 @@ public class NpcStateHasBall : NpcState
     private SphereCollider ballCollider;
     private Transform cameraTransform;
     private float heldTime;
+    private string team;
+    private GameObject closestTeammate;
+    private float turnTime;
 
     public override void Enter(Npc npc)
     {
@@ -14,6 +17,8 @@ public class NpcStateHasBall : NpcState
         ballCollider.enabled = false;//TODO: only ignore collisions with other npcs as well as other held burstballs, but not thrown burstballs
         cameraTransform = Camera.main.transform;
         heldTime = 0f;
+        team = npc.team;
+        turnTime = 0f;
     }
     public override void Update(Npc npc)
     {
@@ -22,10 +27,14 @@ public class NpcStateHasBall : NpcState
 
         if (heldTime >= Random.Range(Npc.minHeldTime, Npc.maxHeldTime)) //throw the ball
         {
-            Vector3 viewDirection = cameraTransform.forward; //get the direction of the camera
-            viewDirection.Normalize();
-            npc.npcBall.GetComponent<Ball>().ThrowBall(viewDirection); //throw ball in direction of the camera
-            npc.ChangeState(npc.stateEmptyHanded); //change state
+            closestTeammate = npc.FindClosestTeammate(npc.transform.position, team);
+            npc.GetComponent<NpcController>().FaceTarget(closestTeammate.transform.position);
+            turnTime++;
+            if (turnTime >= NpcController.TurnTime)
+            {
+                npc.npcBall.GetComponent<Ball>().ThrowBall(npc.transform.forward); //throw ball in direction of the camera
+                npc.ChangeState(npc.stateEmptyHanded); //change state
+            }
         }
     }
     public override void Leave(Npc npc)

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VariableManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     #region Singleton
-    public static VariableManager instance;
+    public static GameManager instance;
 
     private void Awake()
     {

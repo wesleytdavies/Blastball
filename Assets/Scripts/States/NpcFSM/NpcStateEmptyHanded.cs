@@ -20,7 +20,6 @@ public class NpcStateEmptyHanded : NpcState
         {
             npc.GetComponent<NpcController>().GoToBall(closestBall);
         }
-        //npc.GetComponent<NpcController>().GoToBall(closestBall);
     }
     public override void Update(Npc npc)
     {
