@@ -16,7 +16,11 @@ public class NpcStateEmptyHanded : NpcState
         npcCollider = npc.GetComponent<CapsuleCollider>();
         ballMask = LayerMask.GetMask("Ball"); //all balls must be on the Ball layer
         closestBall = npc.FindClosestBall(npc.transform.position);
-        npc.GetComponent<NpcController>().GoToBall(closestBall);
+        if (closestBall != null)
+        {
+            npc.GetComponent<NpcController>().GoToBall(closestBall);
+        }
+        //npc.GetComponent<NpcController>().GoToBall(closestBall);
     }
     public override void Update(Npc npc)
     {

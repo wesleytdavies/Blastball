@@ -6,23 +6,15 @@ using UnityEngine.AI;
 public class NpcController : MonoBehaviour
 {
     private NavMeshAgent agent;
-    [HideInInspector] public GameObject closestBall;
-    private Transform target;
 
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        /*
-        if (closestBall != null)
-        {
-            Debug.Log("penis");
-            GoToBall(closestBall);
-        }
-        */
+
     }
 
     public void GoToBall(GameObject ball)
