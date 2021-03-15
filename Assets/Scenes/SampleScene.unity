@@ -256,7 +256,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &415518676
 MeshRenderer:
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545a1ad6d39542ea9466b5ea15ab903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockCursor: 0
+  lockCursor: 1
   mouseSensitivity: 5
   target: {fileID: 725875597}
   dstFromTarget: 7

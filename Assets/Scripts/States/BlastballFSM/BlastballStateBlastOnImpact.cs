@@ -15,6 +15,7 @@ public class BlastballStateBlastOnImpact : BlastballState
         blastMagnitude = 10f;
         blastLift = 0f;
         goalMask = LayerMask.GetMask("Goal");
+        Debug.Log("ready to blast");
     }
     public override void Update(Blastball blastball) {
         if (Physics.CheckSphere(blastball.transform.position, blastball.transform.lossyScale.x / 2, goalMask))
