@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Npc : MonoBehaviour
 {
     [HideInInspector] public string team; //TODO: strengthen this encapsulation
+    [HideInInspector] public string opposingTeam; //TODO: strengthen this encapsulation
 
     [HideInInspector] public GameObject npcBall;
     public Vector3 heldBallLocation; //location of held ball relative to npc
-    public const float minHeldTime = 5f; //least amount of time enemy can hold onto their ball. Change this value to change difficulty
-    public const float maxHeldTime = 10f; //least amount of time enemy can hold onto their ball. Change this value to change difficulty
+    public const float minHeldTime = 1f; //least amount of time enemy can hold onto their ball. Change this value to change difficulty
+    public const float maxHeldTime = 3f; //least amount of time enemy can hold onto their ball. Change this value to change difficulty
     //[SerializeField] private Color blueTeamColor;
     //[SerializeField] private Color yellowTeamColor;
 
@@ -19,7 +21,7 @@ public class Npc : MonoBehaviour
     public NpcStateHasBall stateHasBall = new NpcStateHasBall();
     #endregion
 
-    private Renderer npcRenderer;
+    //private Renderer npcRenderer;
 
     public void ChangeState(NpcState newState)
     {
@@ -37,6 +39,14 @@ public class Npc : MonoBehaviour
     void Awake()
     {
         team = tag;
+        if (team == "Blue Team") //TODO: use a dictionary to define teams
+        {
+            opposingTeam = "Yellow Team";
+        }
+        else if (team == "Yellow Team")
+        {
+            opposingTeam = "Yellow Team";
+        }
         /*
         npcRenderer = GetComponent<Renderer>();
         if (team == "Blue Team") //TODO: use a dictionary to define team colors

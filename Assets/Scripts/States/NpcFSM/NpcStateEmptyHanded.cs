@@ -23,6 +23,11 @@ public class NpcStateEmptyHanded : NpcState
     }
     public override void Update(Npc npc)
     {
+        closestBall = npc.FindClosestBall(npc.transform.position);
+        if (closestBall != null)
+        {
+            npc.GetComponent<NpcController>().GoToBall(closestBall);
+        }
         //OverlapCapsule calculations based on this: https://roundwide.com/physics-overlap-capsule/
         var center = npc.transform.TransformPoint(npcCollider.center);
         var size = new Vector3(npcCollider.radius, npcCollider.height, npcCollider.radius); //the code given in the above link for this line is WRONG! Don't convert to world position!

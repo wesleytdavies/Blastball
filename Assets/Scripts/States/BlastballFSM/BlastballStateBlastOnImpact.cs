@@ -19,6 +19,13 @@ public class BlastballStateBlastOnImpact : BlastballState
     public override void Update(Blastball blastball) {
         if (Physics.CheckSphere(blastball.transform.position, blastball.transform.lossyScale.x / 2, goalMask))
         {
+            if (blastball.currentTeam == "Blue Team")
+            {
+                ScoreManager.blueScore++;
+            } else if (blastball.currentTeam == "Blue Team")
+            {
+                ScoreManager.yellowScore++;
+            }
             blastball.GetComponent<Ball>().Blast(blastball.transform.position, blastRadius, blastMagnitude, blastLift);
         }
     }

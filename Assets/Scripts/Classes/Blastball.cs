@@ -63,7 +63,7 @@ public class Blastball : MonoBehaviour
     private float _maxMass;
     #endregion
 
-    public int currentTeam; //the team that is currently in possession of the blastball
+    public string currentTeam;
 
     private Rigidbody rb;
 
@@ -88,7 +88,7 @@ public class Blastball : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
         MinSizeVector *= minSize;
         MaxSizeVector *= maxSize;
@@ -97,6 +97,10 @@ public class Blastball : MonoBehaviour
         transform.localScale = MinSizeVector;
         rb = GetComponent<Rigidbody>();
         rb.mass = MinMass;
+    }
+
+    void Start()
+    {
         ChangeState(stateIdle);
     }
 

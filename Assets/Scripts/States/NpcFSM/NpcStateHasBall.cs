@@ -5,9 +5,9 @@ using UnityEngine;
 public class NpcStateHasBall : NpcState
 {
     private SphereCollider ballCollider;
-    private Transform cameraTransform;
     private float heldTime;
     private string team;
+    private string opposingTeam;
     private GameObject closestTeammate;
     private float turnTime;
 
@@ -15,10 +15,14 @@ public class NpcStateHasBall : NpcState
     {
         ballCollider = npc.npcBall.GetComponent<SphereCollider>();
         ballCollider.enabled = false;//TODO: only ignore collisions with other npcs as well as other held burstballs, but not thrown burstballs
-        cameraTransform = Camera.main.transform;
         heldTime = 0f;
         team = npc.team;
+        opposingTeam = npc.opposingTeam;
         turnTime = 0f;
+        if (npc.npcBall.GetComponent<Blastball>())
+        {
+            npc.npcBall.GetComponent<Blastball>().currentTeam = team;
+        }
     }
     public override void Update(Npc npc)
     {
@@ -27,12 +31,21 @@ public class NpcStateHasBall : NpcState
 
         if (heldTime >= Random.Range(Npc.minHeldTime, Npc.maxHeldTime)) //throw the ball
         {
-            closestTeammate = npc.FindClosestTeammate(npc.transform.position, team);
+            if (npc.npcBall.GetComponent<Ball>().Type == Ball.BallType.Blastball)
+            {
+                closestTeammate = npc.FindClosestTeammate(npc.transform.position, team);
+            } else if (npc.npcBall.GetComponent<Ball>().Type == Ball.BallType.Burstball)
+            {
+                closestTeammate = npc.FindClosestTeammate(npc.transform.position, opposingTeam);
+            }
             npc.GetComponent<NpcController>().FaceTarget(closestTeammate.transform.position);
             turnTime++;
             if (turnTime >= NpcController.TurnTime)
             {
-                npc.npcBall.GetComponent<Ball>().ThrowBall(npc.transform.forward); //throw ball in direction of the camera
+                Vector3 viewDirection = npc.transform.forward; //get the direction of the npc
+                viewDirection.Normalize();
+                viewDirection.y += 3f; //TODO: get rid of this magic number
+                npc.npcBall.GetComponent<Ball>().ThrowBall(viewDirection); //throw ball in direction of the npc
                 npc.ChangeState(npc.stateEmptyHanded); //change state
             }
         }

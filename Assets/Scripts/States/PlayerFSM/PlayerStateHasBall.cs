@@ -11,6 +11,10 @@ public class PlayerStateHasBall : PlayerState
         ballCollider = player.playerBall.GetComponent<SphereCollider>();
         ballCollider.enabled = false;//TODO: only ignore collisions with other players as well as other held burstballs, but not thrown burstballs
         cameraTransform = Camera.main.transform;
+        if (player.playerBall.GetComponent<Blastball>())
+        {
+            player.playerBall.GetComponent<Blastball>().currentTeam = "Blue Team";
+        }
     }
     public override void Update(Player player) {
         player.playerBall.transform.position = player.transform.position + player.transform.right * player.heldBallLocation.x + player.transform.up * player.heldBallLocation.y + player.transform.forward * player.heldBallLocation.z; //move the ball to the player's hand
