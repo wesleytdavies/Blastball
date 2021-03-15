@@ -52,6 +52,9 @@ public class Ball : MonoBehaviour
         if (Type == BallType.Blastball)
         {
             GetComponent<Blastball>().ChangeState(GetComponent<Blastball>().stateThrown);
+        }else if (Type == BallType.Burstball)
+        {
+            GetComponent<Burstball>().ChangeState(GetComponent<Burstball>().stateThrown);
         }
     }
 

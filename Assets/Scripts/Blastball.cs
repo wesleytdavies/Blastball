@@ -94,8 +94,8 @@ public class Blastball : MonoBehaviour
         MaxSizeVector *= maxSize;
         MinMass = minMass;
         MaxMass = maxMass;
-        this.gameObject.transform.localScale = MinSizeVector;
-        rb = this.gameObject.GetComponent<Rigidbody>();
+        transform.localScale = MinSizeVector;
+        rb = GetComponent<Rigidbody>();
         rb.mass = MinMass;
         ChangeState(stateIdle);
     }
